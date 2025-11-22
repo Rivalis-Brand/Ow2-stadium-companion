@@ -57,31 +57,33 @@ export function HeroGrid({ onSelect, selectedHeroId, label }: HeroGridProps) {
             whileTap={{ scale: 0.95 }}
             onClick={() => onSelect(hero)}
             className={cn(
-              "aspect-[3/4] relative group overflow-hidden rounded-sm transition-all duration-200",
+              "aspect-[3/4] relative group overflow-hidden rounded-sm transition-all duration-200 bg-black/50",
               "border-2",
               selectedHeroId === hero.id 
                 ? "border-ow-orange ring-2 ring-ow-orange/50 z-10 scale-105" 
                 : "border-white/10 hover:border-white/40 opacity-80 hover:opacity-100"
             )}
           >
-            {/* Placeholder for Hero Image - using color block for now */}
-            <div 
-              className="absolute inset-0 transition-transform group-hover:scale-110"
-              style={{ backgroundColor: hero.color }}
-            >
+            {/* Hero Image */}
+            <div className="absolute inset-0 transition-transform group-hover:scale-110">
+              <img 
+                src={hero.image} 
+                alt={hero.name} 
+                className="w-full h-full object-cover" 
+              />
               <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/80" />
             </div>
             
-            {/* Hero Icon/Symbol overlay */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-20 group-hover:opacity-10 transition-opacity">
-               {hero.role === 'tank' && <Shield className="w-8 h-8 text-white" />}
-               {hero.role === 'damage' && <Sword className="w-8 h-8 text-white" />}
-               {hero.role === 'support' && <Cross className="w-8 h-8 text-white rotate-45" />}
+            {/* Role Icon Overlay (Top Right) */}
+            <div className="absolute top-1 right-1 p-0.5 bg-black/60 rounded-full backdrop-blur-sm border border-white/10">
+               {hero.role === 'tank' && <Shield className="w-3 h-3 text-white" />}
+               {hero.role === 'damage' && <Sword className="w-3 h-3 text-white" />}
+               {hero.role === 'support' && <Cross className="w-3 h-3 text-white rotate-45" />}
             </div>
 
             <div className="absolute bottom-0 left-0 right-0 p-1 text-center">
               <span className={cn(
-                "text-[10px] font-bold uppercase font-display tracking-wider block truncate leading-tight text-white drop-shadow-md",
+                "text-[10px] font-bold uppercase font-display tracking-wider block truncate leading-tight text-white drop-shadow-md shadow-black",
                 selectedHeroId === hero.id ? "text-ow-orange" : ""
               )}>
                 {hero.name}
@@ -90,7 +92,7 @@ export function HeroGrid({ onSelect, selectedHeroId, label }: HeroGridProps) {
             
             {/* Selected Indicator */}
             {selectedHeroId === hero.id && (
-              <div className="absolute top-1 right-1 w-2 h-2 bg-ow-orange rounded-full shadow-lg shadow-ow-orange/50" />
+              <div className="absolute inset-0 border-2 border-ow-orange pointer-events-none rounded-sm" />
             )}
           </motion.button>
         ))}

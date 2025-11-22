@@ -1,11 +1,28 @@
 
+import dvaImg from '@assets/generated_images/d.va_portrait.png';
+import reinhardtImg from '@assets/generated_images/reinhardt_portrait.png';
+import zaryaImg from '@assets/generated_images/zarya_portrait.png';
+import orisaImg from '@assets/generated_images/orisa_portrait.png';
+import junkerQueenImg from '@assets/generated_images/junker_queen_portrait.png';
+import soldier76Img from '@assets/generated_images/soldier_76_portrait.png';
+import cassidyImg from '@assets/generated_images/cassidy_portrait.png';
+import genjiImg from '@assets/generated_images/genji_portrait.png';
+import asheImg from '@assets/generated_images/ashe_portrait.png';
+import meiImg from '@assets/generated_images/mei_portrait.png';
+import reaperImg from '@assets/generated_images/reaper_portrait.png';
+import mercyImg from '@assets/generated_images/mercy_portrait.png';
+import moiraImg from '@assets/generated_images/moira_portrait.png';
+import lucioImg from '@assets/generated_images/lucio_portrait.png';
+import kirikoImg from '@assets/generated_images/kiriko_portrait.png';
+import junoImg from '@assets/generated_images/juno_portrait.png';
+
 export type Role = 'tank' | 'damage' | 'support';
 
 export interface Hero {
   id: string;
   name: string;
   role: Role;
-  image: string; // Using color/placeholder
+  image: string;
   color: string;
 }
 
@@ -38,28 +55,26 @@ export interface BuildGuide {
 // STADIUM ROSTER ONLY
 export const heroes: Hero[] = [
   // Tanks
-  { id: 'dva', name: 'D.Va', role: 'tank', image: '', color: '#ed93c7' },
-  { id: 'reinhardt', name: 'Reinhardt', role: 'tank', image: '', color: '#93a0a4' },
-  { id: 'zarya', name: 'Zarya', role: 'tank', image: '', color: '#e77eb8' },
-  { id: 'orisa', name: 'Orisa', role: 'tank', image: '', color: '#468c43' },
-  { id: 'junkerqueen', name: 'Junker Queen', role: 'tank', image: '', color: '#f3ba23' },
+  { id: 'dva', name: 'D.Va', role: 'tank', image: dvaImg, color: '#ed93c7' },
+  { id: 'reinhardt', name: 'Reinhardt', role: 'tank', image: reinhardtImg, color: '#93a0a4' },
+  { id: 'zarya', name: 'Zarya', role: 'tank', image: zaryaImg, color: '#e77eb8' },
+  { id: 'orisa', name: 'Orisa', role: 'tank', image: orisaImg, color: '#468c43' },
+  { id: 'junkerqueen', name: 'Junker Queen', role: 'tank', image: junkerQueenImg, color: '#f3ba23' },
 
   // Damage
-  { id: 'soldier76', name: 'Soldier: 76', role: 'damage', image: '', color: '#697794' },
-  { id: 'cassidy', name: 'Cassidy', role: 'damage', image: '', color: '#ae5a4c' },
-  { id: 'genji', name: 'Genji', role: 'damage', image: '', color: '#97ef43' },
-  { id: 'ashe', name: 'Ashe', role: 'damage', image: '', color: '#686969' },
-  { id: 'mei', name: 'Mei', role: 'damage', image: '', color: '#6cacd8' },
-  { id: 'reaper', name: 'Reaper', role: 'damage', image: '', color: '#7d3e51' },
-  // Freja is mentioned but might not have a color/official ID yet, omitting to be safe or adding as generic
-  // { id: 'freja', name: 'Freja', role: 'damage', image: '', color: '#ff0000' }, 
-
+  { id: 'soldier76', name: 'Soldier: 76', role: 'damage', image: soldier76Img, color: '#697794' },
+  { id: 'cassidy', name: 'Cassidy', role: 'damage', image: cassidyImg, color: '#ae5a4c' },
+  { id: 'genji', name: 'Genji', role: 'damage', image: genjiImg, color: '#97ef43' },
+  { id: 'ashe', name: 'Ashe', role: 'damage', image: asheImg, color: '#686969' },
+  { id: 'mei', name: 'Mei', role: 'damage', image: meiImg, color: '#6cacd8' },
+  { id: 'reaper', name: 'Reaper', role: 'damage', image: reaperImg, color: '#7d3e51' },
+  
   // Support
-  { id: 'mercy', name: 'Mercy', role: 'support', image: '', color: '#e7e6d1' },
-  { id: 'moira', name: 'Moira', role: 'support', image: '', color: '#803c51' },
-  { id: 'lucio', name: 'Lúcio', role: 'support', image: '', color: '#85c952' },
-  { id: 'kiriko', name: 'Kiriko', role: 'support', image: '', color: '#d44368' },
-  { id: 'juno', name: 'Juno', role: 'support', image: '', color: '#e55d8a' }, // Juno color approx
+  { id: 'mercy', name: 'Mercy', role: 'support', image: mercyImg, color: '#e7e6d1' },
+  { id: 'moira', name: 'Moira', role: 'support', image: moiraImg, color: '#803c51' },
+  { id: 'lucio', name: 'Lúcio', role: 'support', image: lucioImg, color: '#85c952' },
+  { id: 'kiriko', name: 'Kiriko', role: 'support', image: kirikoImg, color: '#d44368' },
+  { id: 'juno', name: 'Juno', role: 'support', image: junoImg, color: '#e55d8a' }, 
 ];
 
 // UNIVERSAL ITEMS
