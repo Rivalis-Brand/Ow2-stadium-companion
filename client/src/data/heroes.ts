@@ -20,6 +20,8 @@ import junkratImg from '@assets/generated_images/junkrat_portrait.png';
 import zenyattaImg from '@assets/generated_images/zenyatta_portrait.png';
 import anaImg from '@assets/generated_images/ana_portrait.png';
 import frejaImg from '@assets/generated_images/freja_portrait.png';
+import hazardImg from '@assets/generated_images/hazard_portrait.png';
+import pharahImg from '@assets/generated_images/pharah_portrait.png';
 
 export type Role = 'tank' | 'damage' | 'support';
 
@@ -57,24 +59,26 @@ export interface BuildGuide {
   tips: string[];
 }
 
-// STADIUM ROSTER SEASON 17 (21 HEROES)
+// STADIUM ROSTER SEASON 19 (23 HEROES)
 export const heroes: Hero[] = [
-  // Tanks (5)
+  // Tanks (6)
   { id: 'reinhardt', name: 'Reinhardt', role: 'tank', image: reinhardtImg, color: '#93a0a4' },
   { id: 'dva', name: 'D.Va', role: 'tank', image: dvaImg, color: '#ed93c7' },
   { id: 'zarya', name: 'Zarya', role: 'tank', image: zaryaImg, color: '#e77eb8' },
   { id: 'orisa', name: 'Orisa', role: 'tank', image: orisaImg, color: '#468c43' },
-  { id: 'sigma', name: 'Sigma', role: 'tank', image: sigmaImg, color: '#93a0a4' }, // NEW SEASON 17
+  { id: 'sigma', name: 'Sigma', role: 'tank', image: sigmaImg, color: '#93a0a4' },
+  { id: 'hazard', name: 'Hazard', role: 'tank', image: hazardImg, color: '#b33c00' }, // NEW SEASON 18/19
   
-  // Damage (7)
+  // Damage (9)
   { id: 'soldier76', name: 'Soldier: 76', role: 'damage', image: soldier76Img, color: '#697794' },
   { id: 'cassidy', name: 'Cassidy', role: 'damage', image: cassidyImg, color: '#ae5a4c' },
   { id: 'genji', name: 'Genji', role: 'damage', image: genjiImg, color: '#97ef43' },
   { id: 'ashe', name: 'Ashe', role: 'damage', image: asheImg, color: '#686969' },
   { id: 'mei', name: 'Mei', role: 'damage', image: meiImg, color: '#6cacd8' },
   { id: 'reaper', name: 'Reaper', role: 'damage', image: reaperImg, color: '#7d3e51' },
-  { id: 'junkrat', name: 'Junkrat', role: 'damage', image: junkratImg, color: '#ecbd53' }, // NEW SEASON 17
-  { id: 'freja', name: 'Freja', role: 'damage', image: frejaImg, color: '#d14434' }, // MID SEASON 16
+  { id: 'junkrat', name: 'Junkrat', role: 'damage', image: junkratImg, color: '#ecbd53' },
+  { id: 'freja', name: 'Freja', role: 'damage', image: frejaImg, color: '#d14434' },
+  { id: 'pharah', name: 'Pharah', role: 'damage', image: pharahImg, color: '#3e7dca' }, // NEW SEASON 18/19
 
   // Support (7)
   { id: 'mercy', name: 'Mercy', role: 'support', image: mercyImg, color: '#e7e6d1' },
@@ -83,7 +87,7 @@ export const heroes: Hero[] = [
   { id: 'kiriko', name: 'Kiriko', role: 'support', image: kirikoImg, color: '#d44368' },
   { id: 'juno', name: 'Juno', role: 'support', image: junoImg, color: '#e55d8a' }, 
   { id: 'ana', name: 'Ana', role: 'support', image: anaImg, color: '#718ab3' }, 
-  { id: 'zenyatta', name: 'Zenyatta', role: 'support', image: zenyattaImg, color: '#ede582' }, // NEW SEASON 17
+  { id: 'zenyatta', name: 'Zenyatta', role: 'support', image: zenyattaImg, color: '#ede582' }, 
 ];
 
 // UNIVERSAL ITEMS
@@ -102,6 +106,18 @@ const commonItems: Item[] = [
 
 // HERO POWERS DATABASE
 const heroPowers: Record<string, Power[]> = {
+  hazard: [
+    { name: 'Adrenaline Rush', description: 'Spike Guard hits reduce Leap cooldown by 0.1s.', tier: 1 },
+    { name: 'Piercing Spike', description: 'Violent Leap shoots projectile ignoring enemies.', tier: 3 },
+    { name: 'Off The Wall', description: 'Jagged Wall is 35% larger + 60 dmg knockback.', tier: 5 },
+    { name: 'Back to Square One', description: 'Ult resets all cooldowns + 25% CDR.', tier: 7 },
+  ],
+  pharah: [
+    { name: 'Triple Volley', description: 'After ability, next shot fires 3 rockets (40% dmg each).', tier: 1 },
+    { name: 'Heat Seekers', description: 'Rockets lock onto enemies after Jet Dash.', tier: 3 },
+    { name: 'Recursion Battery', description: 'Mini-rockets gain 25% Ability Lifesteal.', tier: 5 },
+    { name: 'Blitz Barrage', description: 'Fire mini-Barrage after Jet Dash.', tier: 7 },
+  ],
   reinhardt: [
     { name: 'Wilhelmwagen', description: 'While Barrier active: Heal for 15% mitigated dmg + 30% Speed.', tier: 1 },
     { name: 'Shield Stampede', description: 'Charge knockback +50%, auto-deploys barrier.', tier: 3 },
