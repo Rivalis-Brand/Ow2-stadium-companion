@@ -3,7 +3,7 @@ import { HeroGrid } from '@/components/hero-grid';
 import { Hero, getBuildGuide } from '@/data/heroes';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Shield, Zap, AlertTriangle, Crosshair, ChevronRight, Search } from 'lucide-react';
+import { Shield, Zap, Crosshair, ChevronRight, Search, Coins, Hexagon } from 'lucide-react';
 import bgImage from '@assets/generated_images/futuristic_sci-fi_stadium_arena_background_with_hexagonal_patterns_and_blue_lighting..png';
 
 export default function Home() {
@@ -39,8 +39,8 @@ export default function Home() {
             </div>
           </div>
           <div className="hidden md:block text-right">
-             <div className="text-xs text-ow-orange font-mono uppercase">v1.0.0 // BETA</div>
-             <div className="text-xs text-white/30 font-mono">CONNECTED TO SERVER</div>
+             <div className="text-xs text-ow-orange font-mono uppercase">v2.1.0 // SEASON 17</div>
+             <div className="text-xs text-white/30 font-mono">LIVE DATA</div>
           </div>
         </header>
 
@@ -160,39 +160,68 @@ export default function Home() {
                     </div>
                   </div>
 
-                  {/* Talents / Build */}
+                  {/* ITEMS SHOP */}
                   <div className="bg-black/60 backdrop-blur-md p-6 rounded-lg border border-white/10 shadow-lg">
-                    <div className="flex items-center gap-2 mb-6 text-yellow-400">
-                        <Shield className="w-5 h-5" />
-                        <h3 className="font-display text-xl font-bold uppercase">Recommended Talents</h3>
+                    <div className="flex items-center gap-2 mb-6 text-green-400">
+                        <Coins className="w-5 h-5" />
+                        <h3 className="font-display text-xl font-bold uppercase">Recommended Items</h3>
                     </div>
                     
-                    <div className="grid gap-4">
-                      {buildGuide.talents.map((talent, i) => (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {buildGuide.items.map((item, i) => (
                         <div 
                           key={i}
-                          className={cn(
-                            "relative p-4 rounded-sm border transition-all",
-                            talent.recommended 
-                              ? "bg-linear-to-r from-ow-orange/10 to-transparent border-ow-orange/50" 
-                              : "bg-white/5 border-white/10 opacity-60 grayscale hover:grayscale-0 hover:opacity-100"
-                          )}
+                          className="relative p-4 rounded-sm border bg-white/5 border-white/10 hover:border-green-400/50 transition-colors group"
                         >
                           <div className="flex justify-between items-start">
                             <div>
                               <div className="flex items-center gap-3 mb-1">
-                                <span className="text-xs font-mono text-white/40 bg-black/50 px-1.5 py-0.5 rounded-sm border border-white/10">TIER {talent.tier}</span>
-                                <h4 className={cn("font-display font-bold text-lg uppercase", talent.recommended ? "text-white" : "text-white/70")}>
-                                  {talent.name}
+                                <span className={cn(
+                                  "text-[10px] font-mono font-bold px-1.5 py-0.5 rounded-sm border uppercase",
+                                  item.type === 'survival' ? "text-blue-300 border-blue-500/30 bg-blue-500/10" :
+                                  item.type === 'weapon' ? "text-red-300 border-red-500/30 bg-red-500/10" :
+                                  "text-yellow-300 border-yellow-500/30 bg-yellow-500/10"
+                                )}>
+                                  {item.type}
+                                </span>
+                                <h4 className="font-display font-bold text-lg uppercase text-white group-hover:text-green-400 transition-colors">
+                                  {item.name}
                                 </h4>
                               </div>
-                              <p className="text-sm text-white/60 font-light max-w-md">{talent.description}</p>
+                              <p className="text-sm text-white/60 font-light max-w-md">{item.description}</p>
                             </div>
-                            {talent.recommended && (
-                               <div className="bg-ow-orange text-black text-[10px] font-bold uppercase px-2 py-1 rounded-sm tracking-wider shadow-[0_0_10px_rgba(249,158,26,0.4)]">
-                                 Best Pick
-                               </div>
-                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* POWERS / TALENTS */}
+                  <div className="bg-black/60 backdrop-blur-md p-6 rounded-lg border border-white/10 shadow-lg">
+                    <div className="flex items-center gap-2 mb-6 text-purple-400">
+                        <Hexagon className="w-5 h-5" />
+                        <h3 className="font-display text-xl font-bold uppercase">Power Progression</h3>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      {buildGuide.powers.map((power, i) => (
+                        <div 
+                          key={i}
+                          className="relative p-4 rounded-sm border bg-linear-to-r from-purple-500/10 to-transparent border-purple-500/30 flex gap-4 items-center"
+                        >
+                          <div className="flex-shrink-0 w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center border border-purple-500/50 font-display font-bold text-purple-300 text-xl">
+                            {power.tier}
+                          </div>
+                          
+                          <div>
+                             <h4 className="font-display font-bold text-lg uppercase text-white">
+                               {power.name}
+                             </h4>
+                             <p className="text-sm text-white/70 font-light">{power.description}</p>
+                          </div>
+                          
+                          <div className="ml-auto text-xs font-mono text-purple-300/50 uppercase tracking-widest">
+                            Round {power.tier}
                           </div>
                         </div>
                       ))}
