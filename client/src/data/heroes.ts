@@ -67,18 +67,18 @@ export const heroes: Hero[] = [
   { id: 'zarya', name: 'Zarya', role: 'tank', image: zaryaImg, color: '#e77eb8' },
   { id: 'orisa', name: 'Orisa', role: 'tank', image: orisaImg, color: '#468c43' },
   { id: 'sigma', name: 'Sigma', role: 'tank', image: sigmaImg, color: '#93a0a4' },
-  { id: 'hazard', name: 'Hazard', role: 'tank', image: hazardImg, color: '#b33c00' }, // NEW SEASON 18/19
+  { id: 'hazard', name: 'Hazard', role: 'tank', image: hazardImg, color: '#b33c00' }, 
   
   // Damage (9)
+  { id: 'genji', name: 'Genji', role: 'damage', image: genjiImg, color: '#97ef43' },
   { id: 'soldier76', name: 'Soldier: 76', role: 'damage', image: soldier76Img, color: '#697794' },
   { id: 'cassidy', name: 'Cassidy', role: 'damage', image: cassidyImg, color: '#ae5a4c' },
-  { id: 'genji', name: 'Genji', role: 'damage', image: genjiImg, color: '#97ef43' },
   { id: 'ashe', name: 'Ashe', role: 'damage', image: asheImg, color: '#686969' },
   { id: 'mei', name: 'Mei', role: 'damage', image: meiImg, color: '#6cacd8' },
   { id: 'reaper', name: 'Reaper', role: 'damage', image: reaperImg, color: '#7d3e51' },
   { id: 'junkrat', name: 'Junkrat', role: 'damage', image: junkratImg, color: '#ecbd53' },
   { id: 'freja', name: 'Freja', role: 'damage', image: frejaImg, color: '#d14434' },
-  { id: 'pharah', name: 'Pharah', role: 'damage', image: pharahImg, color: '#3e7dca' }, // NEW SEASON 18/19
+  { id: 'pharah', name: 'Pharah', role: 'damage', image: pharahImg, color: '#3e7dca' }, 
 
   // Support (7)
   { id: 'mercy', name: 'Mercy', role: 'support', image: mercyImg, color: '#e7e6d1' },
@@ -106,6 +106,12 @@ const commonItems: Item[] = [
 
 // HERO POWERS DATABASE
 const heroPowers: Record<string, Power[]> = {
+  genji: [
+    { name: 'Sacred Shuriken', description: 'Throw 2 additional shurikens per attack.', tier: 1 },
+    { name: 'Cybernetic Speed', description: 'Hits grant +2% Attack Speed (stacks 15x).', tier: 3 },
+    { name: 'Dragon\'s Breath', description: 'Blade fires piercing projectiles.', tier: 5 },
+    { name: 'Hanamura Healing', description: 'Crits/Dash grant 25% Overhealth.', tier: 7 },
+  ],
   hazard: [
     { name: 'Adrenaline Rush', description: 'Spike Guard hits reduce Leap cooldown by 0.1s.', tier: 1 },
     { name: 'Piercing Spike', description: 'Violent Leap shoots projectile ignoring enemies.', tier: 3 },
@@ -167,12 +173,6 @@ const heroPowers: Record<string, Power[]> = {
     { name: 'Incendiary Blast', description: 'Coach Gun applies Burning.', tier: 3 },
     { name: 'Incendiary Rounds', description: 'Scoped hits on same target deal +30 dmg.', tier: 5 },
     { name: 'B.O.B. Junior', description: 'Summon Mini-BOB at 50% Ult Cost.', tier: 7 },
-  ],
-  genji: [
-    { name: 'Swift Reset', description: 'Swift strike resets on assist.', tier: 1 },
-    { name: 'Deflect Reflect', description: 'Reflected projectiles deal 20% more damage.', tier: 3 },
-    { name: 'Dragonblade Length', description: 'Blade range increased by 2m.', tier: 5 },
-    { name: 'Ghost Dash', description: 'Swift strike makes you invisible for 0.5s.', tier: 7 },
   ],
   mei: [
     { name: 'Permafrost', description: 'Increase max health by 50% of ability power.', tier: 1 },
