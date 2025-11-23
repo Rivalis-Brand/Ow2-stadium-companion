@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Shield, Zap, Heart, ChevronRight, ChevronLeft, Coins, Hexagon, ShoppingCart, Check, Target, Users } from 'lucide-react';
+import { Shield, Zap, Heart, ChevronRight, ChevronLeft, Coins, Hexagon, ShoppingCart, Check, Target, Users, TrendingUp, TrendingDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -20,6 +20,12 @@ import {
   TacticalPower
 } from '@/data/tactical-builds';
 
+// Round earnings based on game result
+const ROUND_EARNINGS = {
+  win: 1200,
+  loss: 600
+};
+
 export default function Home() {
   const [myHero, setMyHero] = useState<Hero | null>(null);
   const [opponentHero, setOpponentHero] = useState<Hero | null>(null);
@@ -28,14 +34,42 @@ export default function Home() {
   const [credits, setCredits] = useState(3500);
   const [purchasedItems, setPurchasedItems] = useState<Set<string>>(new Set());
   const [purchasedPowers, setPurchasedPowers] = useState<Set<string>>(new Set());
+  const [roundPurchases, setRoundPurchases] = useState<Record<number, { items: string[], powers: string[] }>>({});
+  const [roundResults, setRoundResults] = useState<Record<number, 'win' | 'loss'>>({});
 
   const classBuild = getClassBuilds(selectedClass);
   const currentRecommendation = classBuild.round_recommendations.find(r => r.round === currentRound);
   const affordableItems = getAffordableItems(credits);
   const affordablePowers = getAffordablePowers(selectedClass, currentRound, credits);
 
-  const handleNextRound = () => {
+  const handleNextRound = (result: 'win' | 'loss') => {
     if (currentRound < 7) {
+      // Save current round purchases
+      const currentRoundItems = Array.from(purchasedItems).filter(id => 
+        !(roundPurchases[currentRound]?.items || []).includes(id)
+      );
+      const currentRoundPowers = Array.from(purchasedPowers).filter(id => 
+        !(roundPurchases[currentRound]?.powers || []).includes(id)
+      );
+      
+      setRoundPurchases(prev => ({
+        ...prev,
+        [currentRound]: {
+          items: currentRoundItems,
+          powers: currentRoundPowers
+        }
+      }));
+      
+      // Record result and add earnings
+      setRoundResults(prev => ({
+        ...prev,
+        [currentRound]: result
+      }));
+      
+      const earnings = result === 'win' ? ROUND_EARNINGS.win : ROUND_EARNINGS.loss;
+      setCredits(credits + earnings);
+      
+      // Move to next round
       setCurrentRound(currentRound + 1);
     }
   };
@@ -216,7 +250,7 @@ export default function Home() {
         </Tabs>
 
         {/* Round Navigation */}
-        <div className="mb-6 bg-card border border-border rounded-lg p-4">
+        <div className="mb-6 bg-card border border-border rounded-lg p-4 space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <Button
@@ -238,14 +272,11 @@ export default function Home() {
                 <div className="text-2xl font-display text-muted-foreground">7</div>
               </div>
 
-              <Button
-                variant="default"
-                onClick={handleNextRound}
-                disabled={currentRound === 7}
-                data-testid="button-next-round"
-              >
-                Next Round <ChevronRight className="w-4 h-4 ml-2" />
-              </Button>
+              {currentRound === 7 ? (
+                <Button variant="secondary" disabled>
+                  Final Round
+                </Button>
+              ) : null}
             </div>
 
             {/* Credit Input */}
@@ -260,6 +291,38 @@ export default function Home() {
               />
             </div>
           </div>
+
+          {/* Round Results & Earnings */}
+          {currentRound < 7 && (
+            <div className="bg-primary/5 border border-primary/20 rounded-md p-4">
+              <div className="mb-3">
+                <p className="text-sm font-semibold text-foreground mb-2">Complete this round:</p>
+                <div className="flex gap-3 flex-wrap">
+                  <Button
+                    onClick={() => handleNextRound('win')}
+                    className="bg-green-600 hover:bg-green-700 flex items-center gap-2"
+                    data-testid="button-round-win"
+                  >
+                    <TrendingUp className="w-4 h-4" />
+                    Win (+{ROUND_EARNINGS.win})
+                  </Button>
+                  <Button
+                    onClick={() => handleNextRound('loss')}
+                    className="bg-orange-600 hover:bg-orange-700 flex items-center gap-2"
+                    data-testid="button-round-loss"
+                  >
+                    <TrendingDown className="w-4 h-4" />
+                    Loss (+{ROUND_EARNINGS.loss})
+                  </Button>
+                </div>
+              </div>
+              {roundResults[currentRound] && (
+                <p className="text-xs text-muted-foreground">
+                  Round {currentRound} result: <span className="font-semibold capitalize">{roundResults[currentRound]}</span>
+                </p>
+              )}
+            </div>
+          )}
 
           {/* Round Progress Indicator */}
           <div className="mt-4 flex gap-1">
@@ -316,16 +379,24 @@ export default function Home() {
                   <ShoppingCart className="w-5 h-5" />
                   Purchased This Round
                 </CardTitle>
+                <CardDescription className="flex justify-between items-center">
+                  <span>Current round purchases</span>
+                  {currentRound > 1 && roundResults[currentRound - 1] && (
+                    <Badge className={roundResults[currentRound - 1] === 'win' ? 'bg-green-600' : 'bg-orange-600'}>
+                      Last: {roundResults[currentRound - 1] === 'win' ? `Won (+${ROUND_EARNINGS.win})` : `Lost (+${ROUND_EARNINGS.loss})`}
+                    </Badge>
+                  )}
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 {purchasedItems.size === 0 && purchasedPowers.size === 0 ? (
                   <p className="text-sm text-muted-foreground">No purchases yet</p>
                 ) : (
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     {Array.from(purchasedItems).map(itemId => {
                       const item = tacticalItems.find(i => i.id === itemId);
                       return item ? (
-                        <div key={itemId} className="flex items-center gap-2 text-sm">
+                        <div key={itemId} className="flex items-center gap-2 text-sm p-2 bg-green-500/5 rounded border border-green-500/20">
                           <Check className="w-4 h-4 text-green-500" />
                           <span>{item.name}</span>
                           <Badge variant="secondary" className="ml-auto">{item.price}</Badge>
@@ -335,13 +406,25 @@ export default function Home() {
                     {Array.from(purchasedPowers).map(powerId => {
                       const power = affordablePowers.find(p => p.id === powerId);
                       return power ? (
-                        <div key={powerId} className="flex items-center gap-2 text-sm">
+                        <div key={powerId} className="flex items-center gap-2 text-sm p-2 bg-purple-500/5 rounded border border-purple-500/20">
                           <Check className="w-4 h-4 text-purple-500" />
                           <span>{power.name}</span>
                           <Badge variant="secondary" className="ml-auto">{power.price}</Badge>
                         </div>
                       ) : null;
                     })}
+                    <div className="pt-2 border-t border-border flex justify-between text-sm font-semibold">
+                      <span>Round Total:</span>
+                      <span className="text-foreground">
+                        {Array.from(purchasedItems).reduce((sum, itemId) => {
+                          const item = tacticalItems.find(i => i.id === itemId);
+                          return sum + (item?.price || 0);
+                        }, 0) + Array.from(purchasedPowers).reduce((sum, powerId) => {
+                          const power = affordablePowers.find(p => p.id === powerId);
+                          return sum + (power?.price || 0);
+                        }, 0)}
+                      </span>
+                    </div>
                   </div>
                 )}
               </CardContent>
