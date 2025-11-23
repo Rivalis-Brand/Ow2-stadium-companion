@@ -1,27 +1,30 @@
-
-import reinhardtImg from '@assets/stock_images/overwatch_2_hero_cha_577fa04d.jpg';
-import dvaImg from '@assets/stock_images/overwatch_2_hero_cha_93b64510.jpg';
-import zaryaImg from '@assets/stock_images/overwatch_2_hero_cha_57d33715.jpg';
-import orisaImg from '@assets/stock_images/overwatch_2_hero_cha_524a53b5.jpg';
-import sigmaImg from '@assets/stock_images/overwatch_2_hero_cha_3773a4cf.jpg';
-import hazardImg from '@assets/stock_images/overwatch_2_hero_cha_ee7b8454.jpg';
-import genjiImg from '@assets/stock_images/overwatch_2_hero_cha_d1d68111.jpg';
-import soldier76Img from '@assets/stock_images/overwatch_2_hero_cha_f9b98320.jpg';
-import cassidyImg from '@assets/stock_images/overwatch_2_hero_cha_a9f56596.jpg';
-import asheImg from '@assets/stock_images/overwatch_2_hero_cha_06e77eb9.jpg';
-import meiImg from '@assets/stock_images/overwatch_character__5a70e2b8.jpg';
-import reaperImg from '@assets/stock_images/overwatch_character__613b21e3.jpg';
-import junkratImg from '@assets/stock_images/overwatch_character__ecd0bf62.jpg';
-import frejaImg from '@assets/stock_images/overwatch_character__05ec89d8.jpg';
-import pharahImg from '@assets/stock_images/overwatch_character__9dfb2364.jpg';
-import mercyImg from '@assets/stock_images/overwatch_character__11ee7ed6.jpg';
-import moiraImg from '@assets/stock_images/overwatch_character__8c765267.jpg';
-import lucioImg from '@assets/stock_images/overwatch_character__ba81d687.jpg';
-import kirikoImg from '@assets/stock_images/overwatch_character__3a56ed0e.jpg';
-import junoImg from '@assets/stock_images/overwatch_character__d5caed41.jpg';
-import anaImg from '@assets/stock_images/overwatch_2_game_cha_cf07e691.jpg';
-import zenyattaImg from '@assets/stock_images/overwatch_2_game_cha_e63bad04.jpg';
-import junkerQueenImg from '@assets/stock_images/overwatch_2_game_cha_c740d9af.jpg';
+// Official Overwatch Wiki Hero Portraits (from Overwatch Fandom Wiki)
+// Using direct CDN links to official game portraits
+const heroAvatars = {
+  reinhardt: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/c/c7/Reinhardt_portrait.png',
+  dva: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/4/4e/D.Va_portrait.png',
+  zarya: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/d/d1/Zarya_portrait.png',
+  orisa: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/f/f9/Orisa_portrait.png',
+  sigma: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/c/c5/Sigma_portrait.png',
+  hazard: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/f/f4/Hazard_portrait.png',
+  genji: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/0/04/Genji_portrait.png',
+  soldier76: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/c/c3/Soldier76_portrait.png',
+  cassidy: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/8/8f/Cassidy_portrait.png',
+  ashe: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/0/0c/Ashe_portrait.png',
+  mei: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/3/3b/Mei_portrait.png',
+  reaper: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/e/ee/Reaper_portrait.png',
+  junkrat: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/5/53/Junkrat_portrait.png',
+  freja: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/7/78/Freja_portrait.png',
+  pharah: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/f/fe/Pharah_portrait.png',
+  mercy: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/c/cd/Mercy_portrait.png',
+  moira: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/8/8f/Moira_portrait.png',
+  lucio: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/e/e8/Lúcio_portrait.png',
+  kiriko: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/5/5d/Kiriko_portrait.png',
+  juno: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/8/8d/Juno_portrait.png',
+  ana: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/f/fd/Ana_portrait.png',
+  zenyatta: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/f/f5/Zenyatta_portrait.png',
+  junkerQueen: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/7/76/Junker_Queen_portrait.png',
+};
 
 export type Role = 'tank' | 'damage' | 'support';
 
@@ -62,32 +65,32 @@ export interface BuildGuide {
 // STADIUM ROSTER SEASON 19 (23 HEROES)
 export const heroes: Hero[] = [
   // Tanks (6)
-  { id: 'reinhardt', name: 'Reinhardt', role: 'tank', image: reinhardtImg, color: '#93a0a4' },
-  { id: 'dva', name: 'D.Va', role: 'tank', image: dvaImg, color: '#ed93c7' },
-  { id: 'zarya', name: 'Zarya', role: 'tank', image: zaryaImg, color: '#e77eb8' },
-  { id: 'orisa', name: 'Orisa', role: 'tank', image: orisaImg, color: '#468c43' },
-  { id: 'sigma', name: 'Sigma', role: 'tank', image: sigmaImg, color: '#93a0a4' },
-  { id: 'hazard', name: 'Hazard', role: 'tank', image: hazardImg, color: '#b33c00' }, 
+  { id: 'reinhardt', name: 'Reinhardt', role: 'tank', image: heroAvatars.reinhardt, color: '#93a0a4' },
+  { id: 'dva', name: 'D.Va', role: 'tank', image: heroAvatars.dva, color: '#ed93c7' },
+  { id: 'zarya', name: 'Zarya', role: 'tank', image: heroAvatars.zarya, color: '#e77eb8' },
+  { id: 'orisa', name: 'Orisa', role: 'tank', image: heroAvatars.orisa, color: '#468c43' },
+  { id: 'sigma', name: 'Sigma', role: 'tank', image: heroAvatars.sigma, color: '#93a0a4' },
+  { id: 'hazard', name: 'Hazard', role: 'tank', image: heroAvatars.hazard, color: '#b33c00' }, 
   
   // Damage (9)
-  { id: 'genji', name: 'Genji', role: 'damage', image: genjiImg, color: '#97ef43' },
-  { id: 'soldier76', name: 'Soldier: 76', role: 'damage', image: soldier76Img, color: '#697794' },
-  { id: 'cassidy', name: 'Cassidy', role: 'damage', image: cassidyImg, color: '#ae5a4c' },
-  { id: 'ashe', name: 'Ashe', role: 'damage', image: asheImg, color: '#686969' },
-  { id: 'mei', name: 'Mei', role: 'damage', image: meiImg, color: '#6cacd8' },
-  { id: 'reaper', name: 'Reaper', role: 'damage', image: reaperImg, color: '#7d3e51' },
-  { id: 'junkrat', name: 'Junkrat', role: 'damage', image: junkratImg, color: '#ecbd53' },
-  { id: 'freja', name: 'Freja', role: 'damage', image: frejaImg, color: '#d14434' },
-  { id: 'pharah', name: 'Pharah', role: 'damage', image: pharahImg, color: '#3e7dca' }, 
+  { id: 'genji', name: 'Genji', role: 'damage', image: heroAvatars.genji, color: '#97ef43' },
+  { id: 'soldier76', name: 'Soldier: 76', role: 'damage', image: heroAvatars.soldier76, color: '#697794' },
+  { id: 'cassidy', name: 'Cassidy', role: 'damage', image: heroAvatars.cassidy, color: '#ae5a4c' },
+  { id: 'ashe', name: 'Ashe', role: 'damage', image: heroAvatars.ashe, color: '#686969' },
+  { id: 'mei', name: 'Mei', role: 'damage', image: heroAvatars.mei, color: '#6cacd8' },
+  { id: 'reaper', name: 'Reaper', role: 'damage', image: heroAvatars.reaper, color: '#7d3e51' },
+  { id: 'junkrat', name: 'Junkrat', role: 'damage', image: heroAvatars.junkrat, color: '#ecbd53' },
+  { id: 'freja', name: 'Freja', role: 'damage', image: heroAvatars.freja, color: '#d14434' },
+  { id: 'pharah', name: 'Pharah', role: 'damage', image: heroAvatars.pharah, color: '#3e7dca' }, 
 
   // Support (7)
-  { id: 'mercy', name: 'Mercy', role: 'support', image: mercyImg, color: '#e7e6d1' },
-  { id: 'moira', name: 'Moira', role: 'support', image: moiraImg, color: '#803c51' },
-  { id: 'lucio', name: 'Lúcio', role: 'support', image: lucioImg, color: '#85c952' },
-  { id: 'kiriko', name: 'Kiriko', role: 'support', image: kirikoImg, color: '#d44368' },
-  { id: 'juno', name: 'Juno', role: 'support', image: junoImg, color: '#e55d8a' }, 
-  { id: 'ana', name: 'Ana', role: 'support', image: anaImg, color: '#718ab3' }, 
-  { id: 'zenyatta', name: 'Zenyatta', role: 'support', image: zenyattaImg, color: '#ede582' }, 
+  { id: 'mercy', name: 'Mercy', role: 'support', image: heroAvatars.mercy, color: '#e7e6d1' },
+  { id: 'moira', name: 'Moira', role: 'support', image: heroAvatars.moira, color: '#803c51' },
+  { id: 'lucio', name: 'Lúcio', role: 'support', image: heroAvatars.lucio, color: '#85c952' },
+  { id: 'kiriko', name: 'Kiriko', role: 'support', image: heroAvatars.kiriko, color: '#d44368' },
+  { id: 'juno', name: 'Juno', role: 'support', image: heroAvatars.juno, color: '#e55d8a' }, 
+  { id: 'ana', name: 'Ana', role: 'support', image: heroAvatars.ana, color: '#718ab3' }, 
+  { id: 'zenyatta', name: 'Zenyatta', role: 'support', image: heroAvatars.zenyatta, color: '#ede582' }, 
 ];
 
 // UNIVERSAL ITEMS
