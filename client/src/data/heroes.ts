@@ -1,34 +1,34 @@
-// Official Overwatch Wiki Hero Portraits from Overwatch Fandom CDN
-// All 23 Stadium heroes - verified working URLs from wiki
+// Stadium Builds hero portraits from official stadiumbuilds.io CDN
+// All 23 Stadium heroes with high-quality official Overwatch avatars
 const heroAvatars = {
   // Tanks (6)
-  reinhardt: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/c/c7/Reinhardt_portrait.png?cb=20151109214349',
-  dva: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/4/4e/D.Va_portrait.png?cb=20181120123255',
-  zarya: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/d/d1/Zarya_portrait.png?cb=20151109214803',
-  orisa: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/f/f9/Orisa_portrait.png?cb=20170303115148',
-  sigma: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/5/5b/Sigma_portrait.png?cb=20190719225903',
-  hazard: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/e/e2/Hazard_portrait.png?cb=20230831000000',
+  reinhardt: 'https://qkdvetofbsoynkfprlos.supabase.co/storage/v1/object/public/images/heroes/Icon-Reinhardt.webp',
+  dva: 'https://qkdvetofbsoynkfprlos.supabase.co/storage/v1/object/public/images/heroes/Icon-D.Va.webp',
+  zarya: 'https://qkdvetofbsoynkfprlos.supabase.co/storage/v1/object/public/images/heroes/Icon-Zarya.webp',
+  orisa: 'https://qkdvetofbsoynkfprlos.supabase.co/storage/v1/object/public/images/heroes/Icon-Orisa.webp',
+  sigma: 'https://api.stadiumbuilds.io/storage/v1/object/public/images/heroes/Icon-Sigma.webp',
+  hazard: 'https://api.stadiumbuilds.io/storage/v1/object/public/images/heroes/Icon-Hazard.webp',
   
   // Damage (9)
-  genji: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/0/04/Genji_portrait.png?cb=20181120123505',
-  soldier76: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/c/c3/Soldier76_portrait.png?cb=20151109213803',
-  cassidy: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/4/41/Cassidy_portrait.png?cb=20201211000000',
-  ashe: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/c/c0/Ashe_portrait.png?cb=20181211162320',
-  mei: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/3/3b/Mei_portrait.png?cb=20151109214648',
-  reaper: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/e/ee/Reaper_portrait.png?cb=20151109214706',
-  junkrat: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/5/53/Junkrat_portrait.png?cb=20181120123543',
-  freja: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/d/d3/Freja_portrait.png?cb=20230404000000',
-  pharah: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/f/fe/Pharah_portrait.png?cb=20151109214820',
+  genji: 'https://qkdvetofbsoynkfprlos.supabase.co/storage/v1/object/public/images/heroes/Icon-Genji.webp',
+  soldier76: 'https://qkdvetofbsoynkfprlos.supabase.co/storage/v1/object/public/images/heroes/Icon-Soldier_76.webp',
+  cassidy: 'https://qkdvetofbsoynkfprlos.supabase.co/storage/v1/object/public/images/heroes/Icon-cassidy.webp',
+  ashe: 'https://qkdvetofbsoynkfprlos.supabase.co/storage/v1/object/public/images/heroes/Icon-Ashe.webp',
+  mei: 'https://qkdvetofbsoynkfprlos.supabase.co/storage/v1/object/public/images/heroes/Icon-Mei.webp',
+  reaper: 'https://qkdvetofbsoynkfprlos.supabase.co/storage/v1/object/public/images/heroes/Icon-Reaper.webp',
+  junkrat: 'https://api.stadiumbuilds.io/storage/v1/object/public/images/heroes/Icon-Junkrat.webp',
+  freja: 'https://api.stadiumbuilds.io/storage/v1/object/public/images/heroes/Icon-Freja.webp',
+  pharah: 'https://api.stadiumbuilds.io/storage/v1/object/public/images/heroes/Icon-Pharah.webp',
   
   // Support (8)
-  mercy: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/c/cd/Mercy_portrait.png?cb=20151109214704',
-  moira: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/0/0b/Moira_portrait.png?cb=20171111000000',
-  lucio: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/e/e8/Lúcio_portrait.png?cb=20151109214403',
-  kiriko: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/1/1e/Kiriko_portrait.png?cb=20170926000000',
-  juno: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/e/e4/Juno_portrait.png?cb=20220801000000',
-  ana: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/f/fd/Ana_portrait.png?cb=20160701000000',
-  zenyatta: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/f/f5/Zenyatta_portrait.png?cb=20151109214443',
-  junkerQueen: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/7/76/Junker_Queen_portrait.png?cb=20210730000000',
+  mercy: 'https://qkdvetofbsoynkfprlos.supabase.co/storage/v1/object/public/images/heroes/Icon-Mercy.webp',
+  moira: 'https://qkdvetofbsoynkfprlos.supabase.co/storage/v1/object/public/images/heroes/Icon-Moira.webp',
+  lucio: 'https://qkdvetofbsoynkfprlos.supabase.co/storage/v1/object/public/images/heroes/Icon-Lucio.webp',
+  kiriko: 'https://qkdvetofbsoynkfprlos.supabase.co/storage/v1/object/public/images/heroes/Icon-kiriko.webp',
+  juno: 'https://qkdvetofbsoynkfprlos.supabase.co/storage/v1/object/public/images/heroes/Icon-Juno.webp',
+  ana: 'https://qkdvetofbsoynkfprlos.supabase.co/storage/v1/object/public/images/heroes/Icon-Ana.webp',
+  zenyatta: 'https://api.stadiumbuilds.io/storage/v1/object/public/images/heroes/Icon-Zenyatta.webp',
+  junkerQueen: 'https://qkdvetofbsoynkfprlos.supabase.co/storage/v1/object/public/images/heroes/Icon-Junker_Queen.webp',
 };
 
 export type Role = 'tank' | 'damage' | 'support';
