@@ -35,15 +35,18 @@ export default function Home() {
   const [purchasedItems, setPurchasedItems] = useState<Set<string>>(new Set());
   const [purchasedPowers, setPurchasedPowers] = useState<Set<string>>(new Set());
   const [roundPurchases, setRoundPurchases] = useState<Record<number, { items: string[], powers: string[] }>>({});
-  const [roundResults, setRoundResults] = useState<Record<number, 'win' | 'loss'>>({});
+  const [roundEarnings, setRoundEarnings] = useState<Record<number, number>>({});
+  const [earningsInput, setEarningsInput] = useState<string>('0');;
 
   const classBuild = getClassBuilds(selectedClass);
   const currentRecommendation = classBuild.round_recommendations.find(r => r.round === currentRound);
   const affordableItems = getAffordableItems(credits);
   const affordablePowers = getAffordablePowers(selectedClass, currentRound, credits);
 
-  const handleNextRound = (result: 'win' | 'loss') => {
+  const handleCompleteRound = () => {
     if (currentRound < 7) {
+      const earnings = parseInt(earningsInput) || 0;
+      
       // Save current round purchases
       const currentRoundItems = Array.from(purchasedItems).filter(id => 
         !(roundPurchases[currentRound]?.items || []).includes(id)
@@ -60,16 +63,16 @@ export default function Home() {
         }
       }));
       
-      // Record result and add earnings
-      setRoundResults(prev => ({
+      // Record earnings and add to credits
+      setRoundEarnings(prev => ({
         ...prev,
-        [currentRound]: result
+        [currentRound]: earnings
       }));
       
-      const earnings = result === 'win' ? ROUND_EARNINGS.win : ROUND_EARNINGS.loss;
       setCredits(credits + earnings);
       
-      // Move to next round
+      // Reset earnings input and move to next round
+      setEarningsInput('0');
       setCurrentRound(currentRound + 1);
     }
   };
@@ -295,30 +298,31 @@ export default function Home() {
           {/* Round Results & Earnings */}
           {currentRound < 7 && (
             <div className="bg-primary/5 border border-primary/20 rounded-md p-4">
-              <div className="mb-3">
-                <p className="text-sm font-semibold text-foreground mb-2">Complete this round:</p>
-                <div className="flex gap-3 flex-wrap">
-                  <Button
-                    onClick={() => handleNextRound('win')}
-                    className="bg-green-600 hover:bg-green-700 flex items-center gap-2"
-                    data-testid="button-round-win"
-                  >
-                    <TrendingUp className="w-4 h-4" />
-                    Win (+{ROUND_EARNINGS.win})
-                  </Button>
-                  <Button
-                    onClick={() => handleNextRound('loss')}
-                    className="bg-orange-600 hover:bg-orange-700 flex items-center gap-2"
-                    data-testid="button-round-loss"
-                  >
-                    <TrendingDown className="w-4 h-4" />
-                    Loss (+{ROUND_EARNINGS.loss})
-                  </Button>
+              <p className="text-sm font-semibold text-foreground mb-3">Complete this round:</p>
+              <div className="flex gap-3 items-end flex-wrap">
+                <div className="flex-1 min-w-[200px]">
+                  <label className="text-xs text-muted-foreground uppercase font-semibold mb-2 block">Credits Earned</label>
+                  <Input
+                    type="number"
+                    value={earningsInput}
+                    onChange={(e) => setEarningsInput(e.target.value)}
+                    placeholder="Enter earnings for this round"
+                    className="w-full"
+                    data-testid="input-round-earnings"
+                  />
                 </div>
+                <Button
+                  onClick={handleCompleteRound}
+                  className="bg-green-600 hover:bg-green-700 flex items-center gap-2"
+                  data-testid="button-complete-round"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                  Next Round
+                </Button>
               </div>
-              {roundResults[currentRound] && (
-                <p className="text-xs text-muted-foreground">
-                  Round {currentRound} result: <span className="font-semibold capitalize">{roundResults[currentRound]}</span>
+              {roundEarnings[currentRound] !== undefined && (
+                <p className="text-xs text-green-400 mt-2">
+                  Round {currentRound} earnings: <span className="font-semibold">+{roundEarnings[currentRound]}</span>
                 </p>
               )}
             </div>
@@ -381,9 +385,9 @@ export default function Home() {
                 </CardTitle>
                 <CardDescription className="flex justify-between items-center">
                   <span>Current round purchases</span>
-                  {currentRound > 1 && roundResults[currentRound - 1] && (
-                    <Badge className={roundResults[currentRound - 1] === 'win' ? 'bg-green-600' : 'bg-orange-600'}>
-                      Last: {roundResults[currentRound - 1] === 'win' ? `Won (+${ROUND_EARNINGS.win})` : `Lost (+${ROUND_EARNINGS.loss})`}
+                  {currentRound > 1 && roundEarnings[currentRound - 1] !== undefined && (
+                    <Badge className="bg-green-600">
+                      Last Round: +{roundEarnings[currentRound - 1]}
                     </Badge>
                   )}
                 </CardDescription>
