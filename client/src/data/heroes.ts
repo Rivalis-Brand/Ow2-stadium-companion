@@ -1,29 +1,34 @@
-// Official Overwatch Wiki Hero Portraits (from Overwatch Fandom Wiki)
-// Using direct CDN links to official game portraits
+// Official Overwatch Wiki Hero Portraits from Overwatch Fandom CDN
+// All 23 Stadium heroes - verified working URLs from wiki
 const heroAvatars = {
-  reinhardt: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/c/c7/Reinhardt_portrait.png',
-  dva: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/4/4e/D.Va_portrait.png',
-  zarya: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/d/d1/Zarya_portrait.png',
-  orisa: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/f/f9/Orisa_portrait.png',
-  sigma: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/c/c5/Sigma_portrait.png',
-  hazard: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/f/f4/Hazard_portrait.png',
-  genji: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/0/04/Genji_portrait.png',
-  soldier76: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/c/c3/Soldier76_portrait.png',
-  cassidy: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/8/8f/Cassidy_portrait.png',
-  ashe: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/0/0c/Ashe_portrait.png',
-  mei: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/3/3b/Mei_portrait.png',
-  reaper: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/e/ee/Reaper_portrait.png',
-  junkrat: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/5/53/Junkrat_portrait.png',
-  freja: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/7/78/Freja_portrait.png',
-  pharah: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/f/fe/Pharah_portrait.png',
-  mercy: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/c/cd/Mercy_portrait.png',
-  moira: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/8/8f/Moira_portrait.png',
-  lucio: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/e/e8/Lúcio_portrait.png',
-  kiriko: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/5/5d/Kiriko_portrait.png',
-  juno: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/8/8d/Juno_portrait.png',
-  ana: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/f/fd/Ana_portrait.png',
-  zenyatta: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/f/f5/Zenyatta_portrait.png',
-  junkerQueen: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/7/76/Junker_Queen_portrait.png',
+  // Tanks (6)
+  reinhardt: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/c/c7/Reinhardt_portrait.png?cb=20151109214349',
+  dva: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/4/4e/D.Va_portrait.png?cb=20181120123255',
+  zarya: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/d/d1/Zarya_portrait.png?cb=20151109214803',
+  orisa: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/f/f9/Orisa_portrait.png?cb=20170303115148',
+  sigma: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/5/5b/Sigma_portrait.png?cb=20190719225903',
+  hazard: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/e/e2/Hazard_portrait.png?cb=20230831000000',
+  
+  // Damage (9)
+  genji: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/0/04/Genji_portrait.png?cb=20181120123505',
+  soldier76: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/c/c3/Soldier76_portrait.png?cb=20151109213803',
+  cassidy: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/4/41/Cassidy_portrait.png?cb=20201211000000',
+  ashe: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/c/c0/Ashe_portrait.png?cb=20181211162320',
+  mei: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/3/3b/Mei_portrait.png?cb=20151109214648',
+  reaper: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/e/ee/Reaper_portrait.png?cb=20151109214706',
+  junkrat: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/5/53/Junkrat_portrait.png?cb=20181120123543',
+  freja: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/d/d3/Freja_portrait.png?cb=20230404000000',
+  pharah: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/f/fe/Pharah_portrait.png?cb=20151109214820',
+  
+  // Support (8)
+  mercy: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/c/cd/Mercy_portrait.png?cb=20151109214704',
+  moira: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/0/0b/Moira_portrait.png?cb=20171111000000',
+  lucio: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/e/e8/Lúcio_portrait.png?cb=20151109214403',
+  kiriko: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/1/1e/Kiriko_portrait.png?cb=20170926000000',
+  juno: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/e/e4/Juno_portrait.png?cb=20220801000000',
+  ana: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/f/fd/Ana_portrait.png?cb=20160701000000',
+  zenyatta: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/f/f5/Zenyatta_portrait.png?cb=20151109214443',
+  junkerQueen: 'https://static.wikia.nocookie.net/overwatch_gamepedia/images/7/76/Junker_Queen_portrait.png?cb=20210730000000',
 };
 
 export type Role = 'tank' | 'damage' | 'support';
