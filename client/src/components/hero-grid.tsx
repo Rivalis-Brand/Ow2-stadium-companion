@@ -5,19 +5,23 @@ import { Shield, Sword, Cross, Search } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface HeroGridProps {
-  onSelect: (hero: Hero) => void;
+  onSelect?: (hero: Hero) => void;
+  onHeroSelect?: (hero: Hero) => void;
   selectedHeroId?: string;
+  selectedHero?: Hero;
   label?: string;
 }
 
-export function HeroGrid({ onSelect, selectedHeroId, label }: HeroGridProps) {
+export function HeroGrid({ onSelect, onHeroSelect, selectedHeroId, selectedHero, label }: HeroGridProps) {
   const [filter, setFilter] = useState<Role | 'all'>('all');
   const [search, setSearch] = useState('');
+  const handleSelect = onHeroSelect || onSelect;
 
   const filteredHeroes = heroes.filter(h => {
     const matchesRole = filter === 'all' || h.role === filter;
     const matchesSearch = h.name.toLowerCase().includes(search.toLowerCase());
-    return matchesRole && matchesSearch;
+    const notSelectedHero = !selectedHero || h.id !== selectedHero.id;
+    return matchesRole && matchesSearch && notSelectedHero;
   });
 
   return (
@@ -55,7 +59,7 @@ export function HeroGrid({ onSelect, selectedHeroId, label }: HeroGridProps) {
             key={hero.id}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => onSelect(hero)}
+            onClick={() => handleSelect?.(hero)}
             className={cn(
               "aspect-[3/4] relative group overflow-hidden rounded-sm transition-all duration-200 bg-black/50",
               "border-2",

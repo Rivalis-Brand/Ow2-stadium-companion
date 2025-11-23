@@ -6,6 +6,7 @@ export interface TacticalItem {
   description: string;
   price: number;
   category: 'weapon' | 'survival' | 'ability' | 'utility';
+  rarity: 'common' | 'rare' | 'epic';
   stat_bonuses?: string[];
 }
 
@@ -31,35 +32,146 @@ export interface ClassBuild {
 }
 
 export const tacticalItems: TacticalItem[] = [
-  // Survival Items
-  { id: 'charged_plating', name: 'Charged Plating', description: 'Gain 25 Armor + 10% Ability Power after using Ultimate', price: 800, category: 'survival', stat_bonuses: ['+25 Armor', '+10% Ability Power'] },
-  { id: 'winning_attitude', name: 'Winning Attitude', description: '+25 Health, +15% Ultimate Charge on death', price: 600, category: 'survival', stat_bonuses: ['+25 Health', '+15% Ult Charge'] },
-  { id: 'electrolytes', name: 'Electrolytes', description: 'Start round with 100 unrecoverable Overhealth', price: 500, category: 'survival', stat_bonuses: ['+100 Overhealth'] },
-  { id: 'field_rations', name: 'Field Rations', description: 'Restore 8 HP/s while on Objective', price: 700, category: 'survival', stat_bonuses: ['+8 HP/s on Objective'] },
-  { id: 'adrenaline_shot', name: 'Adrenaline Shot', description: '+10 HP, Health Packs give speed boost & overhealth', price: 450, category: 'survival', stat_bonuses: ['+10 HP', 'Health Pack Buff'] },
-  { id: 'running_shoes', name: 'Running Shoes', description: '+10 HP, +20% Move Speed out of combat', price: 500, category: 'survival', stat_bonuses: ['+10 HP', '+20% Speed'] },
-  { id: 'heartbeat_sensor', name: 'Heartbeat Sensor', description: '+5% Speed, reveal low HP enemies', price: 650, category: 'utility', stat_bonuses: ['+5% Speed', 'Enemy Reveal'] },
-  { id: 'siphon_gloves', name: 'Siphon Gloves', description: '+25 HP, Melee heals 25 HP', price: 550, category: 'survival', stat_bonuses: ['+25 HP', 'Melee Lifesteal'] },
-  { id: 'first_aid_kit', name: 'First Aid Kit', description: '+25 Shields, faster shield regeneration', price: 600, category: 'survival', stat_bonuses: ['+25 Shields', 'Faster Regen'] },
-  { id: 'fortified_armor', name: 'Fortified Armor', description: '+50 Armor, reduce incoming damage by 5%', price: 1000, category: 'survival', stat_bonuses: ['+50 Armor', '-5% Damage Taken'] },
+  // ========== SURVIVAL ITEMS ==========
+  // Common Tier (1000)
+  { id: 'adrenaline_shot', name: 'Adrenaline Shot', description: 'Health packs grant 20% move speed for 5s and 50 overhealth', price: 1000, category: 'survival', rarity: 'common' },
+  { id: 'electrolytes', name: 'Electrolytes', description: 'At round start, gain 100 unrecoverable overhealth', price: 1000, category: 'survival', rarity: 'common' },
+  { id: 'field_rations', name: 'Field Rations', description: 'While on objective, restore 8 HP every 1 second', price: 1000, category: 'survival', rarity: 'common' },
+  { id: 'running_shoes', name: 'Running Shoes', description: 'At round start and respawn, gain 20% move speed for 10s out of combat', price: 1000, category: 'survival', rarity: 'common' },
   
-  // Weapon Items
-  { id: 'shieldbuster', name: 'Shieldbuster', description: '+5% Weapon Power, Fire Rate buff vs Shields/Armor', price: 700, category: 'weapon', stat_bonuses: ['+5% Weapon Power', 'Anti-Shield'] },
-  { id: 'critical_scope', name: 'Critical Scope', description: '+15% Critical Hit Damage', price: 850, category: 'weapon', stat_bonuses: ['+15% Crit Damage'] },
-  { id: 'penetrator_rounds', name: 'Penetrator Rounds', description: 'Shots pierce through one additional target', price: 900, category: 'weapon', stat_bonuses: ['Pierce +1 Target'] },
-  { id: 'rapid_fire', name: 'Rapid Fire Mod', description: '+10% Fire Rate, -5% Reload Time', price: 750, category: 'weapon', stat_bonuses: ['+10% Fire Rate', '-5% Reload'] },
-  { id: 'explosive_rounds', name: 'Explosive Rounds', description: 'Primary fire deals splash damage', price: 1100, category: 'weapon', stat_bonuses: ['Splash Damage'] },
+  // Common Tier (1500)
+  { id: 'armored_vest', name: 'Armored Vest', description: 'Grants 25 armor', price: 1500, category: 'survival', rarity: 'common' },
+  { id: 'first_aid_kit', name: 'First Aid Kit', description: '+25 shields, reduce shield regen time by 33%', price: 1500, category: 'survival', rarity: 'common' },
+  { id: 'heartbeat_sensor', name: 'Heartbeat Sensor', description: 'Enemies below 30% HP are revealed to you', price: 1500, category: 'survival', rarity: 'common' },
+  { id: 'siphon_gloves', name: 'Siphon Gloves', description: 'Quick melee damage heals for 25 HP', price: 1500, category: 'survival', rarity: 'common' },
   
-  // Ability Items
-  { id: 'cooldown_chip', name: 'Cooldown Chip', description: 'Reduce all ability cooldowns by 10%', price: 800, category: 'ability', stat_bonuses: ['-10% Cooldowns'] },
-  { id: 'ability_amp', name: 'Ability Amplifier', description: '+15% Ability Power', price: 900, category: 'ability', stat_bonuses: ['+15% Ability Power'] },
-  { id: 'ult_accelerator', name: 'Ult Accelerator', description: 'Ultimate charges 20% faster', price: 1000, category: 'ability', stat_bonuses: ['+20% Ult Charge'] },
-  { id: 'energy_recycle', name: 'Energy Recycler', description: 'Kills reduce cooldowns by 2 seconds', price: 850, category: 'ability', stat_bonuses: ['Kill CDR 2s'] },
+  // Rare Tier (3750)
+  { id: 'reinforced_titanium', name: 'Reinforced Titanium', description: 'While shields present, take 10% reduced ability damage', price: 3750, category: 'survival', rarity: 'rare' },
   
-  // Utility Items
-  { id: 'scanner_visor', name: 'Scanner Visor', description: 'Reveal enemies through walls for 3s after damage', price: 700, category: 'utility', stat_bonuses: ['Wallhack on Hit'] },
-  { id: 'medkit_boost', name: 'Medkit Booster', description: 'Health packs restore 50% more HP', price: 500, category: 'utility', stat_bonuses: ['+50% Health Pack'] },
-  { id: 'resilience_core', name: 'Resilience Core', description: 'Reduce stun and slow duration by 30%', price: 750, category: 'utility', stat_bonuses: ['-30% CC Duration'] },
+  // Rare Tier (4000)
+  { id: 'cushioned_padding', name: 'Cushioned Padding', description: '+25 shields, -40% negative effect duration, restore 10% max HP when stunned/slept', price: 4000, category: 'survival', rarity: 'rare' },
+  { id: 'ironclad_exhaust_ports', name: 'Ironclad Exhaust Ports', description: '-5% cooldown. Using ability grants 25 overhealth for 3s', price: 4000, category: 'survival', rarity: 'rare' },
+  { id: 'vishkar_condenser', name: 'Vishkar Condenser', description: '+25 shields, convert 100 health into shields', price: 4000, category: 'survival', rarity: 'rare' },
+  { id: 'vital_e_tee', name: 'Vital-e-tee', description: 'Convert 100 health into armor', price: 4000, category: 'survival', rarity: 'rare' },
+  
+  // Rare Tier (4500)
+  { id: 'crusader_hydraulics', name: 'Crusader Hydraulics', description: '+25 armor, take 10% reduced weapon damage while armored', price: 4500, category: 'survival', rarity: 'rare' },
+  { id: 'iron_eyes', name: 'Iron Eyes', description: '+25 shields, take 15% reduced critical hit damage', price: 4500, category: 'survival', rarity: 'rare' },
+  
+  // Rare Tier (5000)
+  { id: 'meka_z_series', name: 'Meka Z-Series', description: '+8% to health, armor, and shields', price: 5000, category: 'survival', rarity: 'rare' },
+  
+  // Epic Tier (9000)
+  { id: 'geneticist_vial', name: 'Geneticist\'s Vial', description: 'First time you would die, revive with 200 HP after 3s', price: 9000, category: 'survival', rarity: 'epic' },
+  
+  // Epic Tier (9500)
+  { id: 'bloodbound', name: 'Bloodbound', description: '+50 HP, last enemy to damage you is revealed. Deal 10% more damage to them', price: 9500, category: 'survival', rarity: 'epic' },
+  { id: 'divine_intervention', name: 'Divine Intervention', description: '+50 shields, taking 100+ damage restores 15% of damage and shields regen', price: 9500, category: 'survival', rarity: 'epic' },
+  { id: 'gloomgauntlet', name: 'Gloomgauntlet', description: '+50 armor, +15% melee damage, melee grants 10% move speed and 5% max HP regen', price: 9500, category: 'survival', rarity: 'epic' },
+  
+  // Epic Tier (10000)
+  { id: 'martian_mender', name: 'Martian Mender', description: '+25 HP, -10% cooldown, restore 3% max HP every 1s', price: 10000, category: 'survival', rarity: 'epic' },
+  { id: 'phantasmic_flux', name: 'Phantasmic Flux', description: '+10% weapon power, +10% ability power, +15% lifesteal. At full HP, lifesteal grants up to 100 overhealth', price: 10000, category: 'survival', rarity: 'epic' },
+  { id: 'rustung_von_wilhelm', name: 'Rustung Von Wilhelm', description: '+15% health/armor/shields, below 30% HP gain 10% damage reduction', price: 10000, category: 'survival', rarity: 'epic' },
+  { id: 'vanadium_injection', name: 'Vanadium Injection', description: 'At 100% ult charge: +50 HP, +10% weapon/ability power, +10% attack speed, -10% cooldown, +10% move speed', price: 10000, category: 'survival', rarity: 'epic' },
+  
+  // Epic Tier (11000)
+  { id: 'nebula_conduit', name: 'Nebula Conduit', description: '+50 HP, +10% weapon power, prevent 15% incoming damage over 3s', price: 11000, category: 'survival', rarity: 'epic' },
+  { id: 'ogundimu_reduction_field', name: 'Ogundimu Reduction Field', description: '+50 armor, taking damage grants 0.5% damage reduction for 1s (stacks 20x)', price: 11000, category: 'survival', rarity: 'epic' },
+  
+  // ========== WEAPON ITEMS ==========
+  // Common Tier (1000)
+  { id: 'compensator', name: 'Compensator', description: '+5% weapon power', price: 1000, category: 'weapon', rarity: 'common' },
+  { id: 'plasma_converter', name: 'Plasma Converter', description: '+10% weapon lifesteal', price: 1000, category: 'weapon', rarity: 'common' },
+  { id: 'weapon_grease', name: 'Weapon Grease', description: '+5% attack speed', price: 1000, category: 'weapon', rarity: 'common' },
+  
+  // Common Tier (1500)
+  { id: 'ammo_reserves', name: 'Ammo Reserves', description: '+20% max ammo', price: 1500, category: 'weapon', rarity: 'common' },
+  { id: 'frenzy_amplifier', name: 'Frenzy Amplifier', description: 'Eliminations grant +10% attack speed and +15% move speed for 3s', price: 1500, category: 'weapon', rarity: 'common' },
+  
+  // Rare Tier (3750)
+  { id: 'aftermarket_firing_pin', name: 'Aftermarket Firing Pin', description: '+10% attack speed, +5% move speed', price: 3750, category: 'weapon', rarity: 'rare' },
+  
+  // Rare Tier (4000)
+  { id: 'advanced_nanobiotics', name: 'Advanced Nanobiotics', description: 'After healing an ally, gain 10% attack speed for 3s', price: 4000, category: 'weapon', rarity: 'rare' },
+  { id: 'shieldbuster', name: 'Shieldbuster', description: 'After dealing damage to shields/armor, gain 15% attack speed for 1s', price: 4000, category: 'weapon', rarity: 'rare' },
+  { id: 'stockpile', name: 'Stockpile', description: '+5% attack speed, +25% max ammo', price: 4000, category: 'weapon', rarity: 'rare' },
+  
+  // Rare Tier (4500)
+  { id: 'technoleech', name: 'Technoleech', description: '+5% weapon power, +10% weapon lifesteal', price: 4500, category: 'weapon', rarity: 'rare' },
+  
+  // Rare Tier (5000)
+  { id: 'icy_coolant', name: 'Icy Coolant', description: '+10% weapon power, -5% cooldown reduction', price: 5000, category: 'weapon', rarity: 'rare' },
+  
+  // Rare Tier (5500)
+  { id: 'talon_modification_module', name: 'Talon Modification Module', description: '+15% weapon power', price: 5500, category: 'weapon', rarity: 'rare' },
+  
+  // Epic Tier (9000)
+  { id: 'codebreaker', name: 'Codebreaker', description: '+15% weapon power, ignore 50% of armor\'s damage reduction', price: 9000, category: 'weapon', rarity: 'epic' },
+  
+  // Epic Tier (9500)
+  { id: 'salvaged_slugs', name: 'Salvaged Slugs', description: '+10% attack speed, +25% damage to barriers, 40% chance to restore 1 ammo', price: 9500, category: 'weapon', rarity: 'epic' },
+  { id: 'volskaya_ordnance', name: 'Volskaya Ordnance', description: '+10% attack speed, deal 3% more damage per 100 max HP target has vs you (up to 15%)', price: 9500, category: 'weapon', rarity: 'epic' },
+  
+  // Epic Tier (10000)
+  { id: 'commanders_clip', name: 'Commander\'s Clip', description: '+10% attack speed, +40% max ammo, ability restores 10% max ammo', price: 10000, category: 'weapon', rarity: 'epic' },
+  { id: 'weapon_jammer', name: 'Weapon Jammer', description: '+25 armor, +10% weapon power, weapon damage negates 10% enemy attack speed', price: 10000, category: 'weapon', rarity: 'epic' },
+  
+  // Epic Tier (11000)
+  { id: 'amaris_antidote', name: 'Amari\'s Antidote', description: '+25 HP, +15% weapon power, increased healing while healing low HP targets', price: 11000, category: 'weapon', rarity: 'epic' },
+  { id: 'booster_jets', name: 'Booster Jets', description: '+20% attack speed, using ability grants +20% move speed for 2s', price: 11000, category: 'weapon', rarity: 'epic' },
+  { id: 'el_sa_ka_suppressor', name: 'El-Sa\'Ka Suppressor', description: '+10% weapon power, critical hits apply 30% healing reduction for 2s', price: 11000, category: 'weapon', rarity: 'epic' },
+  { id: 'hardlight_accelerator', name: 'Hardlight Accelerator', description: '+10% weapon power, -10% cooldown, ability grants +5% weapon power for 3s (stacks 3x)', price: 11000, category: 'weapon', rarity: 'epic' },
+  
+  // Epic Tier (13000)
+  { id: 'the_closer', name: 'The Closer', description: '+20% weapon power, +10% critical damage, critical hits reveal target for 3s', price: 13000, category: 'weapon', rarity: 'epic' },
+  
+  // Epic Tier (13500)
+  { id: 'eye_of_the_spider', name: 'Eye of the Spider', description: 'Deal 10% increased damage to enemies below 30% HP', price: 13500, category: 'weapon', rarity: 'epic' },
+  
+  // ========== ABILITY ITEMS ==========
+  // Common Tier (1000)
+  { id: 'charged_plating', name: 'Charged Plating', description: 'After spending ult, gain 25 armor and 10% ability power for round', price: 1000, category: 'ability', rarity: 'common' },
+  { id: 'power_playbook', name: 'Power Playbook', description: '+10% ability power', price: 1000, category: 'ability', rarity: 'common' },
+  { id: 'shady_spectacles', name: 'Shady Spectacles', description: '+10% ability lifesteal', price: 1000, category: 'ability', rarity: 'common' },
+  
+  // Common Tier (1500)
+  { id: 'winning_attitude', name: 'Winning Attitude', description: '+25 HP, on death gain 15% ult charge', price: 1500, category: 'ability', rarity: 'common' },
+  
+  // Rare Tier (3750)
+  { id: 'custom_stock', name: 'Custom Stock', description: '+5% weapon power, +10% ability power', price: 3750, category: 'ability', rarity: 'rare' },
+  
+  // Rare Tier (4000)
+  { id: 'biolight_overflow', name: 'Biolight Overflow', description: '+25 HP, +5% ability power, on ult grant nearby allies 50 overhealth', price: 4000, category: 'ability', rarity: 'rare' },
+  { id: 'energized_bracers', name: 'Energized Bracers', description: '+10% ability power, +10% ability lifesteal', price: 4000, category: 'ability', rarity: 'rare' },
+  { id: 'junker_whatchamajig', name: 'Junker Whatchamajig', description: '+25% starting ult charge', price: 4000, category: 'ability', rarity: 'rare' },
+  { id: 'wrist_wraps', name: 'Wrist Wraps', description: '+5% ability power, +10% attack speed', price: 4000, category: 'ability', rarity: 'rare' },
+  
+  // Rare Tier (5000)
+  { id: 'multi_tool', name: 'Multi-Tool', description: '+5% ability power, -10% cooldown reduction', price: 5000, category: 'ability', rarity: 'rare' },
+  
+  // Rare Tier (5500)
+  { id: 'nano_cola', name: 'Nano Cola', description: '+20% ability power', price: 5500, category: 'ability', rarity: 'rare' },
+  
+  // Epic Tier (9500)
+  { id: 'three_tap_tommygun', name: 'Three-Tap Tommygun', description: '+10% ability power, +10% attack speed, ability grants 3% max HP weapon damage bonus', price: 9500, category: 'ability', rarity: 'epic' },
+  
+  // Epic Tier (10000)
+  { id: 'biotech_maximizer', name: 'Biotech Maximizer', description: '+25 HP, +10% ability power, healing ability reduces cooldown by 5% per ally healed', price: 10000, category: 'ability', rarity: 'epic' },
+  { id: 'catalytic_crystal', name: 'Catalytic Crystal', description: '+15% ability power, ability damage/healing grants 20% more ult charge', price: 10000, category: 'ability', rarity: 'epic' },
+  { id: 'lumerico_fusion_drive', name: 'Lumerico Fusion Drive', description: '+50 armor, +15% ability power, ability restores 50 shields over 2s', price: 10000, category: 'ability', rarity: 'epic' },
+  { id: 'superflexor', name: 'Superflexor', description: '+25 HP, +10% weapon power, weapon/healing grants +5% ability power for 3s (stacks 5x)', price: 10000, category: 'ability', rarity: 'epic' },
+  
+  // Epic Tier (10500)
+  { id: 'cybervenom', name: 'Cybervenom', description: '+10% ability power, -5% cooldown, ability damage applies 30% healing reduction for 2s', price: 10500, category: 'ability', rarity: 'epic' },
+  
+  // Epic Tier (11000)
+  { id: 'iridescent_iris', name: 'Iridescent Iris', description: '+20% ability power, -10% cooldown, after ult gain 100 overhealth for 3s', price: 11000, category: 'ability', rarity: 'epic' },
+  { id: 'liquid_nitrogen', name: 'Liquid Nitrogen', description: '+25 HP, +10% ability power, ability damage slows enemy move speed by 20% for 3s', price: 11000, category: 'ability', rarity: 'epic' },
+  { id: 'mark_of_the_kitsune', name: 'Mark of the Kitsune', description: '+10% ability power, ability grants next weapon damage/healing 25 bonus damage/healing', price: 11000, category: 'ability', rarity: 'epic' },
+  
+  // Epic Tier (13500)
+  { id: 'champions_kit', name: 'Champion\'s Kit', description: '+40% ability power', price: 13500, category: 'ability', rarity: 'epic' },
 ];
 
 export const tacticalPowers: Record<ClassRole, TacticalPower[]> = {
@@ -100,411 +212,144 @@ export const getClassBuilds = (role: ClassRole, opponentRole?: ClassRole): Class
     tank: {
       role: 'tank',
       focus: 'Maximum Survivability & Utility',
-      round_recommendations: opponentRole === 'damage' ? [
-        // VS Damage: Focus on armor and damage mitigation
-        {
-          round: 1,
-          priority_items: ['electrolytes', 'fortified_armor'],
-          priority_powers: ['tank_t1_sustain'],
-          strategy_tip: 'Stack armor early against burst damage. Barrier Mastery blocks their damage spikes.',
-        },
-        {
-          round: 2,
-          priority_items: ['first_aid_kit', 'resilience_core'],
-          priority_powers: [],
-          strategy_tip: 'Add shields and CC reduction. Damage dealers rely on follow-up CC.',
-        },
-        {
-          round: 3,
-          priority_items: ['charged_plating', 'siphon_gloves'],
-          priority_powers: ['tank_t3_survival'],
-          strategy_tip: 'Damage Sponge mitigates their burst windows. Armor after ult keeps you alive.',
-        },
-        {
-          round: 4,
-          priority_items: ['field_rations', 'ability_amp'],
-          priority_powers: [],
-          strategy_tip: 'Contest objective for passive healing. Amp your protective abilities.',
-        },
-        {
-          round: 5,
-          priority_items: ['winning_attitude', 'cooldown_chip'],
-          priority_powers: ['tank_t5_armor'],
-          strategy_tip: 'Titanium Plating makes you incredibly tanky. Cycle abilities faster.',
-        },
-        {
-          round: 6,
-          priority_items: ['ult_accelerator', 'heartbeat_sensor'],
-          priority_powers: [],
-          strategy_tip: 'Farm ult quickly. Your defensive ult can shut down their damage phase.',
-        },
-        {
-          round: 7,
-          priority_items: ['energy_recycle'],
-          priority_powers: ['tank_t7_revive'],
-          strategy_tip: 'Second Wind gives insurance against their burst combos.',
-        },
-      ] : opponentRole === 'support' ? [
-        // VS Support: Focus on sustained pressure
-        {
-          round: 1,
-          priority_items: ['adrenaline_shot', 'running_shoes'],
-          priority_powers: ['tank_t1_utility'],
-          strategy_tip: 'Pressure supports with extended CC. Mobility helps you chase healers.',
-        },
-        {
-          round: 2,
-          priority_items: ['siphon_gloves', 'cooldown_chip'],
-          priority_powers: [],
-          strategy_tip: 'Self-sustain and ability spam. Out-sustain their healing with constant pressure.',
-        },
-        {
-          round: 3,
-          priority_items: ['shieldbuster', 'ability_amp'],
-          priority_powers: ['tank_t3_utility'],
-          strategy_tip: 'Zone Controller makes it harder for supports to position safely.',
-        },
-        {
-          round: 4,
-          priority_items: ['field_rations', 'first_aid_kit'],
-          priority_powers: [],
-          strategy_tip: 'Match their healing output with your own sustain on objective.',
-        },
-        {
-          round: 5,
-          priority_items: ['fortified_armor', 'charged_plating'],
-          priority_powers: ['tank_t5_regen'],
-          strategy_tip: 'Battle Regeneration forces them to overheal to keep up.',
-        },
-        {
-          round: 6,
-          priority_items: ['ult_accelerator', 'scanner_visor'],
-          priority_powers: [],
-          strategy_tip: 'Reveal low HP targets. Farm ult to force support defensives.',
-        },
-        {
-          round: 7,
-          priority_items: ['energy_recycle'],
-          priority_powers: ['tank_t7_ult'],
-          strategy_tip: 'Ultimate Fortress lets you dive supports fearlessly.',
-        },
-      ] : [
-        // VS Tank or Default
+      round_recommendations: [
         {
           round: 1,
           priority_items: ['adrenaline_shot', 'running_shoes'],
           priority_powers: ['tank_t1_sustain'],
-          strategy_tip: 'Start with mobility and sustain. Barrier Mastery for shield wars.',
+          strategy_tip: 'Start with mobility and sustain. Barrier Mastery maximizes your shield value.',
         },
         {
           round: 2,
           priority_items: ['first_aid_kit', 'siphon_gloves'],
           priority_powers: [],
-          strategy_tip: 'Build effective health pool with shields and lifesteal.',
+          strategy_tip: 'Build effective HP with shields and self-healing.',
         },
         {
           round: 3,
-          priority_items: ['fortified_armor', 'resilience_core'],
+          priority_items: ['armored_vest', 'heartbeat_sensor'],
           priority_powers: ['tank_t3_survival'],
-          strategy_tip: 'Armor and CC reduction. Win the tank battle through mitigation.',
+          strategy_tip: 'Add armor and awareness. Damage Sponge provides mitigation.',
         },
         {
           round: 4,
-          priority_items: ['cooldown_chip', 'field_rations'],
+          priority_items: ['ironclad_exhaust_ports', 'field_rations'],
           priority_powers: [],
-          strategy_tip: 'Ability spam advantage. Contest objective for sustain.',
+          strategy_tip: 'Spam abilities for survival. Contest objectives for passive healing.',
         },
         {
           round: 5,
-          priority_items: ['charged_plating', 'ability_amp'],
+          priority_items: ['charged_plating', 'nano_cola'],
           priority_powers: ['tank_t5_armor'],
-          strategy_tip: 'Titanium Plating for massive armor. Focus on objective control.',
+          strategy_tip: 'Titanium Plating gives massive armor. Ult upgrades your defense.',
         },
         {
           round: 6,
-          priority_items: ['ult_accelerator', 'heartbeat_sensor'],
+          priority_items: ['junker_whatchamajig', 'cushioned_padding'],
           priority_powers: [],
-          strategy_tip: 'Farm ult - tank ults can turn teamfights.',
+          strategy_tip: 'Farm ult faster. CC resistance helps survive focus.',
         },
         {
           round: 7,
-          priority_items: ['energy_recycle'],
+          priority_items: ['vanadium_injection'],
           priority_powers: ['tank_t7_revive'],
-          strategy_tip: 'Second Wind for clutch survivability in extended fights.',
+          strategy_tip: 'Second Wind for clutch survival. Massive power spike at full ult charge.',
         },
       ],
     },
     damage: {
       role: 'damage',
       focus: 'Maximum Damage Output + Survivability',
-      round_recommendations: opponentRole === 'tank' ? [
-        // VS Tank: Shield break and sustained damage
-        {
-          round: 1,
-          priority_items: ['shieldbuster', 'rapid_fire'],
-          priority_powers: ['dmg_t1_crit'],
-          strategy_tip: 'Shieldbuster essential vs tanks. Stack fire rate for shield pressure.',
-        },
-        {
-          round: 2,
-          priority_items: ['penetrator_rounds', 'critical_scope'],
-          priority_powers: [],
-          strategy_tip: 'Pierce through to backline. Crits help burst through tank health.',
-        },
-        {
-          round: 3,
-          priority_items: ['electrolytes', 'winning_attitude'],
-          priority_powers: ['dmg_t3_survival'],
-          strategy_tip: 'Combat Medic keeps you alive. Tanks have high kill threat.',
-        },
-        {
-          round: 4,
-          priority_items: ['ability_amp', 'cooldown_chip'],
-          priority_powers: [],
-          strategy_tip: 'Ability spam to pressure tank cooldowns and barriers.',
-        },
-        {
-          round: 5,
-          priority_items: ['explosive_rounds', 'siphon_gloves'],
-          priority_powers: ['dmg_t5_balanced'],
-          strategy_tip: 'Tactical Superiority for sustained trades. Splash damage for AoE pressure.',
-        },
-        {
-          round: 6,
-          priority_items: ['ult_accelerator', 'first_aid_kit'],
-          priority_powers: [],
-          strategy_tip: 'Farm ult on tank frontline. Shields for survivability.',
-        },
-        {
-          round: 7,
-          priority_items: ['fortified_armor'],
-          priority_powers: ['dmg_t7_ult'],
-          strategy_tip: 'Extended ult duration maximizes tank shred potential.',
-        },
-      ] : opponentRole === 'support' ? [
-        // VS Support: Burst and pressure
-        {
-          round: 1,
-          priority_items: ['electrolytes', 'critical_scope'],
-          priority_powers: ['dmg_t1_crit'],
-          strategy_tip: 'Burst supports before they can react. Precision Training for picks.',
-        },
-        {
-          round: 2,
-          priority_items: ['rapid_fire', 'scanner_visor'],
-          priority_powers: [],
-          strategy_tip: 'Track support positioning. High fire rate denies healing windows.',
-        },
-        {
-          round: 3,
-          priority_items: ['adrenaline_shot', 'running_shoes'],
-          priority_powers: ['dmg_t3_burst'],
-          strategy_tip: 'Assassination Protocol for execute pressure. Mobility to chase.',
-        },
-        {
-          round: 4,
-          priority_items: ['penetrator_rounds', 'ability_amp'],
-          priority_powers: [],
-          strategy_tip: 'Pierce through peel. Amp abilities for kill confirm.',
-        },
-        {
-          round: 5,
-          priority_items: ['winning_attitude', 'siphon_gloves'],
-          priority_powers: ['dmg_t5_damage'],
-          strategy_tip: 'Glass Cannon maximizes burst. Lifesteal for sustain.',
-        },
-        {
-          round: 6,
-          priority_items: ['ult_accelerator', 'cooldown_chip'],
-          priority_powers: [],
-          strategy_tip: 'Farm ult quickly. Spam abilities to pressure support cooldowns.',
-        },
-        {
-          round: 7,
-          priority_items: ['explosive_rounds'],
-          priority_powers: ['dmg_t7_multi'],
-          strategy_tip: 'Chain Reaction secures kills on grouped supports.',
-        },
-      ] : [
-        // VS Damage or Default
+      round_recommendations: [
         {
           round: 1,
           priority_items: ['adrenaline_shot', 'electrolytes'],
           priority_powers: ['dmg_t1_crit'],
-          strategy_tip: 'Precision Training for damage duels. Overhealth for early fights.',
+          strategy_tip: 'Precision Training for duels. Overhealth for early fights.',
         },
         {
           round: 2,
-          priority_items: ['critical_scope', 'rapid_fire'],
+          priority_items: ['compensator', 'weapon_grease'],
           priority_powers: [],
-          strategy_tip: 'Max damage output. Win the damage race.',
+          strategy_tip: 'Stack weapon power and attack speed for damage.',
         },
         {
           round: 3,
           priority_items: ['winning_attitude', 'siphon_gloves'],
           priority_powers: ['dmg_t3_survival'],
-          strategy_tip: 'Combat Medic crucial for survivability. Lifesteal for trades.',
+          strategy_tip: 'Combat Medic keeps you alive. Lifesteal for trades.',
         },
         {
           round: 4,
-          priority_items: ['penetrator_rounds', 'shieldbuster'],
+          priority_items: ['aftermarket_firing_pin', 'power_playbook'],
           priority_powers: [],
-          strategy_tip: 'Pierce and shield break for multi-target value.',
+          strategy_tip: 'Balanced offense and ability power. Consistent damage output.',
         },
         {
           round: 5,
-          priority_items: ['first_aid_kit', 'fortified_armor'],
+          priority_items: ['first_aid_kit', 'talon_modification_module'],
           priority_powers: ['dmg_t5_balanced'],
-          strategy_tip: 'Tactical Superiority balances offense and defense.',
+          strategy_tip: 'Tactical Superiority balances offense/defense. Add survivability.',
         },
         {
           round: 6,
-          priority_items: ['ult_accelerator', 'ability_amp'],
+          priority_items: ['junker_whatchamajig', 'energized_bracers'],
           priority_powers: [],
-          strategy_tip: 'Farm ult fast - can secure team wipes.',
+          strategy_tip: 'Farm ult quickly. Extra ability power scales your damage.',
         },
         {
           round: 7,
-          priority_items: ['explosive_rounds'],
+          priority_items: ['champions_kit'],
           priority_powers: ['dmg_t7_multi'],
-          strategy_tip: 'Chain Reaction turns you into killing machine.',
+          strategy_tip: 'Chain Reaction with massive ability power for kills.',
         },
       ],
     },
     support: {
       role: 'support',
       focus: 'Best Healing Kit (Not Damage)',
-      round_recommendations: opponentRole === 'damage' ? [
-        // VS Damage: Defensive healing
+      round_recommendations: [
         {
           round: 1,
-          priority_items: ['medkit_boost', 'electrolytes'],
+          priority_items: ['adrenaline_shot', 'running_shoes'],
           priority_powers: ['sup_t1_heal'],
-          strategy_tip: 'Enhanced Healing crucial vs burst. Health packs for emergency heals.',
+          strategy_tip: 'Enhanced Healing mandatory. Mobility to reach teammates.',
         },
         {
           round: 2,
-          priority_items: ['ability_amp', 'cooldown_chip'],
+          priority_items: ['power_playbook', 'shady_spectacles'],
           priority_powers: [],
-          strategy_tip: 'Amp heals and spam them. Damage dealers punish long cooldowns.',
+          strategy_tip: 'Ability power and lifesteal scale your healing.',
         },
         {
           round: 3,
-          priority_items: ['first_aid_kit', 'resilience_core'],
-          priority_powers: ['sup_t3_efficiency'],
-          strategy_tip: 'Resource Management for sustained healing. CC reduction vs CC chains.',
-        },
-        {
-          round: 4,
-          priority_items: ['ult_accelerator', 'fortified_armor'],
-          priority_powers: [],
-          strategy_tip: 'Farm defensive ult. Armor helps survive dive.',
-        },
-        {
-          round: 5,
-          priority_items: ['charged_plating', 'field_rations'],
-          priority_powers: ['sup_t5_burst'],
-          strategy_tip: 'Emergency Response saves critical allies from burst.',
-        },
-        {
-          round: 6,
-          priority_items: ['running_shoes', 'heartbeat_sensor'],
-          priority_powers: [],
-          strategy_tip: 'Mobility to escape divers. Track low HP allies.',
-        },
-        {
-          round: 7,
-          priority_items: ['energy_recycle'],
-          priority_powers: ['sup_t7_revive'],
-          strategy_tip: 'Guardian Angel protects burst targets.',
-        },
-      ] : opponentRole === 'tank' ? [
-        // VS Tank: Sustained healing
-        {
-          round: 1,
-          priority_items: ['medkit_boost', 'ability_amp'],
-          priority_powers: ['sup_t1_heal'],
-          strategy_tip: 'Enhanced Healing for tank sustain. Amp your heal output.',
-        },
-        {
-          round: 2,
-          priority_items: ['cooldown_chip', 'adrenaline_shot'],
-          priority_powers: [],
-          strategy_tip: 'Constant heal uptime. Tanks need sustained healing.',
-        },
-        {
-          round: 3,
-          priority_items: ['ult_accelerator', 'field_rations'],
+          priority_items: ['winning_attitude', 'first_aid_kit'],
           priority_powers: ['sup_t3_aoe'],
-          strategy_tip: 'Group Therapy for team healing. Objective heals.',
+          strategy_tip: 'Group Therapy spreads heals to team. Health for survival.',
         },
         {
           round: 4,
-          priority_items: ['charged_plating', 'first_aid_kit'],
+          priority_items: ['junker_whatchamajig', 'field_rations'],
           priority_powers: [],
-          strategy_tip: 'Build survivability. Tanks create long fights.',
+          strategy_tip: 'Farm ult on objectives. Support ults win teamfights.',
         },
         {
           round: 5,
-          priority_items: ['shieldbuster', 'scanner_visor'],
-          priority_powers: ['sup_t5_buff'],
-          strategy_tip: 'Combat Medic Field helps team break tanks.',
-        },
-        {
-          round: 6,
-          priority_items: ['fortified_armor', 'resilience_core'],
-          priority_powers: [],
-          strategy_tip: 'Tank CC is dangerous. Build defensive stats.',
-        },
-        {
-          round: 7,
-          priority_items: ['energy_recycle'],
-          priority_powers: ['sup_t7_ult'],
-          strategy_tip: 'Transcendent Care maximizes ultimate healing.',
-        },
-      ] : [
-        // VS Support or Default
-        {
-          round: 1,
-          priority_items: ['medkit_boost', 'running_shoes'],
-          priority_powers: ['sup_t1_heal'],
-          strategy_tip: 'Enhanced Healing mandatory. Mobility for positioning.',
-        },
-        {
-          round: 2,
-          priority_items: ['ability_amp', 'adrenaline_shot'],
-          priority_powers: [],
-          strategy_tip: 'Ability Power scales healing. Health pack synergy.',
-        },
-        {
-          round: 3,
-          priority_items: ['cooldown_chip', 'first_aid_kit'],
-          priority_powers: ['sup_t3_aoe'],
-          strategy_tip: 'Group Therapy spreads heals. CDR for spam.',
-        },
-        {
-          round: 4,
-          priority_items: ['ult_accelerator', 'field_rations'],
-          priority_powers: [],
-          strategy_tip: 'Farm ult on objective. Support ults win fights.',
-        },
-        {
-          round: 5,
-          priority_items: ['charged_plating', 'resilience_core'],
+          priority_items: ['charged_plating', 'cushioned_padding'],
           priority_powers: ['sup_t5_burst'],
-          strategy_tip: 'Emergency Response for critical saves.',
+          strategy_tip: 'Emergency Response saves critical allies.',
         },
         {
           round: 6,
-          priority_items: ['fortified_armor', 'heartbeat_sensor'],
+          priority_items: ['armored_vest', 'heartbeat_sensor'],
           priority_powers: [],
           strategy_tip: 'Survive focus fire. Track low HP allies.',
         },
         {
           round: 7,
-          priority_items: ['energy_recycle'],
+          priority_items: ['champions_kit'],
           priority_powers: ['sup_t7_ult'],
-          strategy_tip: 'Transcendent Care maximizes healing output.',
+          strategy_tip: 'Transcendent Care maximizes ultimate healing output.',
         },
       ],
     },

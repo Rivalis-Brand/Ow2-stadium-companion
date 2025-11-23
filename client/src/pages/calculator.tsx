@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Shield, Zap, Heart, ChevronRight, ChevronLeft, Coins, Hexagon, ShoppingCart, Check } from 'lucide-react';
+import { Shield, Zap, Heart, ChevronRight, ChevronLeft, Coins, Hexagon, ShoppingCart, Check, Target, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { HeroGrid } from '@/components/hero-grid';
+import { Hero } from '@/data/heroes';
 import bgImage from '@assets/generated_images/futuristic_sci-fi_stadium_arena_background_with_hexagonal_patterns_and_blue_lighting..png';
 import { 
   ClassRole, 
@@ -19,9 +21,11 @@ import {
 } from '@/data/tactical-builds';
 
 export default function Home() {
+  const [myHero, setMyHero] = useState<Hero | null>(null);
+  const [opponentHero, setOpponentHero] = useState<Hero | null>(null);
   const [selectedClass, setSelectedClass] = useState<ClassRole>('tank');
   const [currentRound, setCurrentRound] = useState(1);
-  const [credits, setCredits] = useState(1000);
+  const [credits, setCredits] = useState(3500);
   const [purchasedItems, setPurchasedItems] = useState<Set<string>>(new Set());
   const [purchasedPowers, setPurchasedPowers] = useState<Set<string>>(new Set());
 
@@ -113,7 +117,7 @@ export default function Home() {
                 TACTICAL <span className="text-primary">CALCULATOR</span>
               </h1>
               <p className="text-muted-foreground text-sm uppercase tracking-widest font-semibold">
-                Build Optimizer v2.0
+                {myHero ? `${myHero.name} vs ${opponentHero?.name || 'Opponent'}` : 'Select Your Hero'}
               </p>
             </div>
           </div>
@@ -128,6 +132,59 @@ export default function Home() {
           </div>
         </header>
 
+        {/* Hero Selection */}
+        {!myHero && (
+          <Card className="mb-8 border-primary/50 bg-gradient-to-r from-primary/5 to-accent/5">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Target className="w-5 h-5 text-primary" />
+                Select Your Hero
+              </CardTitle>
+              <CardDescription>Choose your hero to see matchup-specific build recommendations</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <HeroGrid onHeroSelect={setMyHero} />
+            </CardContent>
+          </Card>
+        )}
+
+        {myHero && !opponentHero && (
+          <Card className="mb-8 border-accent/50 bg-gradient-to-r from-accent/5 to-primary/5">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Users className="w-5 h-5 text-accent" />
+                Select Your Opponent
+              </CardTitle>
+              <CardDescription>Choose opponent hero for matchup analysis and counter-build recommendations</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <HeroGrid onHeroSelect={setOpponentHero} selectedHero={myHero} />
+            </CardContent>
+          </Card>
+        )}
+
+        {myHero && opponentHero && (
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-4 p-4 rounded-lg bg-card border border-primary/30">
+            <div className="flex items-center gap-4">
+              <div className="text-center">
+                <Badge className="mb-2 block">{myHero.name}</Badge>
+                <span className="text-xs text-muted-foreground">{myHero.role}</span>
+              </div>
+              <div className="text-2xl font-bold text-muted-foreground">VS</div>
+              <div className="text-center">
+                <Badge variant="outline" className="mb-2 block">{opponentHero.name}</Badge>
+                <span className="text-xs text-muted-foreground">{opponentHero.role}</span>
+              </div>
+            </div>
+            <Button variant="ghost" size="sm" onClick={() => { setMyHero(null); setOpponentHero(null); }}>
+              Change Heroes
+            </Button>
+          </div>
+        )}
+
+        {/* Only show calculator when both heroes are selected */}
+        {!myHero || !opponentHero ? null : (
+        <>
         {/* Class Tabs */}
         <Tabs value={selectedClass} onValueChange={(val) => setSelectedClass(val as ClassRole)} className="mb-6">
           <TabsList className="grid w-full grid-cols-3 gap-2 bg-card border border-border p-1">
@@ -517,6 +574,8 @@ export default function Home() {
             )}
           </div>
         </div>
+        </>
+        )}
       </div>
     </div>
   );
